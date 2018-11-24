@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="emedModelStoreContainer" CdmEntityContainer="emedEntities">
+    <EntitySetMapping Name="Appointments">
+      <EntityTypeMapping TypeName="emedModel.Appointment">
+        <MappingFragment StoreEntitySet="Appointments">
+          <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="AllDay" ColumnName="AllDay" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="ResourceIDs" ColumnName="ResourceIDs" />
+          <ScalarProperty Name="ReminderInfo" ColumnName="ReminderInfo" />
+          <ScalarProperty Name="RecurrenceInfo" ColumnName="RecurrenceInfo" />
+          <ScalarProperty Name="TimeZoneId" ColumnName="TimeZoneId" />
+          <ScalarProperty Name="CustomField1" ColumnName="CustomField1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bills">
+      <EntityTypeMapping TypeName="emedModel.bill">
+        <MappingFragment StoreEntitySet="bill">
+          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+          <ScalarProperty Name="template_id" ColumnName="template_id" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="bill_nr" ColumnName="bill_nr" />
+          <ScalarProperty Name="creator_id" ColumnName="creator_id" />
+          <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="attachment_url" ColumnName="attachment_url" />
+          <ScalarProperty Name="bill_date" ColumnName="bill_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bill_details">
+      <EntityTypeMapping TypeName="emedModel.bill_details">
+        <MappingFragment StoreEntitySet="bill_details">
+          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+          <ScalarProperty Name="service_id" ColumnName="service_id" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="casenotes">
+      <EntityTypeMapping TypeName="emedModel.casenote">
+        <MappingFragment StoreEntitySet="casenote">
+          <ScalarProperty Name="casenote_id" ColumnName="casenote_id" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="creator_id" ColumnName="creator_id" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="attachment" ColumnName="attachment" />
+          <ScalarProperty Name="entry_text" ColumnName="entry_text" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="emedModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="creator_id" ColumnName="creator_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="acronym" ColumnName="acronym" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="departments">
+      <EntityTypeMapping TypeName="emedModel.department">
+        <MappingFragment StoreEntitySet="department">
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="department_name" ColumnName="department_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="messagings">
+      <EntityTypeMapping TypeName="emedModel.messaging">
+        <MappingFragment StoreEntitySet="messaging">
+          <ScalarProperty Name="messaging_id" ColumnName="messaging_id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="port_nr" ColumnName="port_nr" />
+          <ScalarProperty Name="server_address" ColumnName="server_address" />
+          <ScalarProperty Name="sslEnabled" ColumnName="sslEnabled" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="patients">
+      <EntityTypeMapping TypeName="emedModel.patient">
+        <MappingFragment StoreEntitySet="patients">
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="patient_nr" ColumnName="patient_nr" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="salutation" ColumnName="salutation" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="other_name" ColumnName="other_name" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="marital_status" ColumnName="marital_status" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="telefax" ColumnName="telefax" />
+          <ScalarProperty Name="street_address" ColumnName="street_address" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="region" ColumnName="region" />
+          <ScalarProperty Name="affix" ColumnName="affix" />
+          <ScalarProperty Name="zip" ColumnName="zip" />
+          <ScalarProperty Name="town" ColumnName="town" />
+          <ScalarProperty Name="partner_id" ColumnName="partner_id" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="qm_sop">
+      <EntityTypeMapping TypeName="emedModel.qm_sop">
+        <MappingFragment StoreEntitySet="qm_sop">
+          <ScalarProperty Name="qm_sop_id" ColumnName="qm_sop_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="filePath" ColumnName="filePath" />
+          <ScalarProperty Name="qm_tree_id" ColumnName="qm_tree_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="approved_by" ColumnName="approved_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="qm_tree">
+      <EntityTypeMapping TypeName="emedModel.qm_tree">
+        <MappingFragment StoreEntitySet="qm_tree">
+          <ScalarProperty Name="qm_tree_id" ColumnName="qm_tree_id" />
+          <ScalarProperty Name="creator_id" ColumnName="creator_id" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="childs" ColumnName="childs" />
+          <ScalarProperty Name="isChild" ColumnName="isChild" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resources">
+      <EntityTypeMapping TypeName="emedModel.Resource">
+        <MappingFragment StoreEntitySet="Resources">
+          <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="CustomField1" ColumnName="CustomField1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="services">
+      <EntityTypeMapping TypeName="emedModel.service">
+        <MappingFragment StoreEntitySet="service">
+          <ScalarProperty Name="service_id" ColumnName="service_id" />
+          <ScalarProperty Name="creator_id" ColumnName="creator_id" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="isFavourite" ColumnName="isFavourite" />
+          <ScalarProperty Name="service_catalog_id" ColumnName="service_catalog_id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="service_catalog">
+      <EntityTypeMapping TypeName="emedModel.service_catalog">
+        <MappingFragment StoreEntitySet="service_catalog">
+          <ScalarProperty Name="service_catalog_id" ColumnName="service_catalog_id" />
+          <ScalarProperty Name="creator_id" ColumnName="creator_id" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="temp_search">
+      <EntityTypeMapping TypeName="emedModel.temp_search">
+        <MappingFragment StoreEntitySet="temp_search">
+          <ScalarProperty Name="temp_search_id" ColumnName="temp_search_id" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="temp_service">
+      <EntityTypeMapping TypeName="emedModel.temp_service">
+        <MappingFragment StoreEntitySet="temp_service">
+          <ScalarProperty Name="temp_service_id" ColumnName="temp_service_id" />
+          <ScalarProperty Name="service_id" ColumnName="service_id" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="creator_id" ColumnName="creator_id" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="templates">
+      <EntityTypeMapping TypeName="emedModel.template">
+        <MappingFragment StoreEntitySet="template">
+          <ScalarProperty Name="template_id" ColumnName="template_id" />
+          <ScalarProperty Name="creator_id" ColumnName="creator_id" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="source_document" ColumnName="source_document" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="time_recording">
+      <EntityTypeMapping TypeName="emedModel.time_recording">
+        <MappingFragment StoreEntitySet="time_recording">
+          <ScalarProperty Name="tc_id" ColumnName="tc_id" />
+          <ScalarProperty Name="creator_id" ColumnName="creator_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="date_from" ColumnName="date_from" />
+          <ScalarProperty Name="date_to" ColumnName="date_to" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="trt_id" ColumnName="trt_id" />
+          <ScalarProperty Name="state" ColumnName="state" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="time_recording_details">
+      <EntityTypeMapping TypeName="emedModel.time_recording_details">
+        <MappingFragment StoreEntitySet="time_recording_details">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="tc_id" ColumnName="tc_id" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="duration2" ColumnName="duration2" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="time_recording_type">
+      <EntityTypeMapping TypeName="emedModel.time_recording_type">
+        <MappingFragment StoreEntitySet="time_recording_type">
+          <ScalarProperty Name="trt_id" ColumnName="trt_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_detail">
+      <EntityTypeMapping TypeName="emedModel.user_detail">
+        <MappingFragment StoreEntitySet="user_detail">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="age" ColumnName="age" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="emedModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="salutation" ColumnName="salutation" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="other_name" ColumnName="other_name" />
+          <ScalarProperty Name="affix" ColumnName="affix" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="doctor" ColumnName="doctor" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="acronym" ColumnName="acronym" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="confirm_password" ColumnName="confirm_password" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="skin_name" ColumnName="skin_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

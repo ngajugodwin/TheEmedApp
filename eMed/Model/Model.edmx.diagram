@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="538ea1ac991b480b8e2165bb00fe1e85" Name="Diagram1">
+        <EntityTypeShape EntityType="emedModel.Appointment" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.bill" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.bill_details" Width="1.5" PointX="7.5" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.casenote" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.category" Width="1.5" PointX="3" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.department" Width="1.5" PointX="3.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.messaging" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.patient" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.qm_sop" Width="1.5" PointX="6" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.qm_tree" Width="1.5" PointX="3.75" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.Resource" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.service" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.service_catalog" Width="1.5" PointX="3" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.temp_search" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.temp_service" Width="1.5" PointX="10.5" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.template" Width="1.5" PointX="8.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.time_recording" Width="1.5" PointX="6" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.time_recording_details" Width="1.5" PointX="8.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.time_recording_type" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.user_detail" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="emedModel.user" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <AssociationConnector Association="emedModel.FK__bill__creator_id__59C55456" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__bill__patient_id__5BAD9CC8" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__bill__template_i__58D1301D" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__bill_deta__bill___65370702" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__bill_deta__servi__662B2B3B" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__casenote__catego__503BEA1C" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__casenote__creato__4F47C5E3" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__casenote__patien__51300E55" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__category__creato__40F9A68C" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__service__categor__671F4F74" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__template__catego__43D61337" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__qm_sop__departme__67DE6983" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__user_deta__depar__2DE6D218" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__temp_sear__patie__7BE56230" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__temp_serv__patie__7A3223E8" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__qm_sop__approved__7908F585" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__qm_sop__qm_tree___4E1E9780" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__service__service__0D7A0286" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__temp_serv__quant__793DFFAF" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__temp_sear__user___7CD98669" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__temp_serv__creat__7B264821" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__template__creato__44CA3770" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__time_reco__tc_id__61316BF4" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__time_reco__trt_i__32767D0B" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__time_reco__trt_i__345EC57D" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__time_reco__user___336AA144" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__time_reco__user___603D47BB" ManuallyRouted="false" />
+        <AssociationConnector Association="emedModel.FK__user_deta__user___2CF2ADDF" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

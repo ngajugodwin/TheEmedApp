@@ -1,0 +1,843 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="emedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="UniqueID" />
+    </Key>
+    <Property Name="UniqueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="Int32" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="AllDay" Type="Boolean" />
+    <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Label" Type="Int32" />
+    <Property Name="ResourceID" Type="Int32" />
+    <Property Name="ResourceIDs" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReminderInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecurrenceInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TimeZoneId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomField1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="bill">
+    <Key>
+      <PropertyRef Name="bill_id" />
+    </Key>
+    <Property Name="bill_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="template_id" Type="Int32" Nullable="false" />
+    <Property Name="patient_id" Type="Int32" Nullable="false" />
+    <Property Name="bill_nr" Type="String" MaxLength="9" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="creator_id" Type="Int32" Nullable="false" />
+    <Property Name="total_amount" Type="Decimal" Precision="11" Scale="4" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="attachment_url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_date" Type="DateTime" Precision="2" />
+    <NavigationProperty Name="user" Relationship="Self.FK__bill__creator_id__59C55456" FromRole="bill" ToRole="users" />
+    <NavigationProperty Name="patient" Relationship="Self.FK__bill__patient_id__5BAD9CC8" FromRole="bill" ToRole="patients" />
+    <NavigationProperty Name="template" Relationship="Self.FK__bill__template_i__58D1301D" FromRole="bill" ToRole="template" />
+    <NavigationProperty Name="bill_details" Relationship="Self.FK__bill_deta__bill___65370702" FromRole="bill" ToRole="bill_details" />
+  </EntityType>
+  <EntityType Name="bill_details">
+    <Key>
+      <PropertyRef Name="bill_id" />
+      <PropertyRef Name="service_id" />
+    </Key>
+    <Property Name="bill_id" Type="Int32" Nullable="false" />
+    <Property Name="service_id" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="11" Scale="4" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="bill" Relationship="Self.FK__bill_deta__bill___65370702" FromRole="bill_details" ToRole="bill" />
+    <NavigationProperty Name="service" Relationship="Self.FK__bill_deta__servi__662B2B3B" FromRole="bill_details" ToRole="service" />
+  </EntityType>
+  <EntityType Name="casenote">
+    <Key>
+      <PropertyRef Name="casenote_id" />
+    </Key>
+    <Property Name="casenote_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="created_at" Type="DateTime" Precision="2" />
+    <Property Name="creator_id" Type="Int32" Nullable="false" />
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <Property Name="attachment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="entry_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="patient_id" Type="Int32" />
+    <NavigationProperty Name="category" Relationship="Self.FK__casenote__catego__503BEA1C" FromRole="casenote" ToRole="category" />
+    <NavigationProperty Name="user" Relationship="Self.FK__casenote__creato__4F47C5E3" FromRole="casenote" ToRole="users" />
+    <NavigationProperty Name="patient" Relationship="Self.FK__casenote__patien__51300E55" FromRole="casenote" ToRole="patients" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="creator_id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="acronym" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="active" Type="Int32" />
+    <NavigationProperty Name="casenotes" Relationship="Self.FK__casenote__catego__503BEA1C" FromRole="category" ToRole="casenote" />
+    <NavigationProperty Name="user" Relationship="Self.FK__category__creato__40F9A68C" FromRole="category" ToRole="users" />
+    <NavigationProperty Name="services" Relationship="Self.FK__service__categor__671F4F74" FromRole="category" ToRole="service" />
+    <NavigationProperty Name="templates" Relationship="Self.FK__template__catego__43D61337" FromRole="category" ToRole="template" />
+  </EntityType>
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="department_id" />
+    </Key>
+    <Property Name="department_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="department_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="qm_sop" Relationship="Self.FK__qm_sop__departme__67DE6983" FromRole="department" ToRole="qm_sop" />
+    <NavigationProperty Name="user_detail" Relationship="Self.FK__user_deta__depar__2DE6D218" FromRole="department" ToRole="user_detail" />
+  </EntityType>
+  <EntityType Name="messaging">
+    <Key>
+      <PropertyRef Name="messaging_id" />
+    </Key>
+    <Property Name="messaging_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="port_nr" Type="Int32" />
+    <Property Name="server_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sslEnabled" Type="Int32" />
+  </EntityType>
+  <EntityType Name="patient">
+    <Key>
+      <PropertyRef Name="patient_id" />
+    </Key>
+    <Property Name="patient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="patient_nr" Type="Int32" />
+    <Property Name="title" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="salutation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="other_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="marital_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="telefax" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+    <Property Name="street_address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+    <Property Name="mobile" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+    <Property Name="country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="affix" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="town" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="partner_id" Type="Int32" />
+    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="isActive" Type="Int32" />
+    <Property Name="contact_person" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="bills" Relationship="Self.FK__bill__patient_id__5BAD9CC8" FromRole="patients" ToRole="bill" />
+    <NavigationProperty Name="casenotes" Relationship="Self.FK__casenote__patien__51300E55" FromRole="patients" ToRole="casenote" />
+    <NavigationProperty Name="temp_search" Relationship="Self.FK__temp_sear__patie__7BE56230" FromRole="patients" ToRole="temp_search" />
+    <NavigationProperty Name="temp_service" Relationship="Self.FK__temp_serv__patie__7A3223E8" FromRole="patients" ToRole="temp_service" />
+  </EntityType>
+  <EntityType Name="qm_sop">
+    <Key>
+      <PropertyRef Name="qm_sop_id" />
+    </Key>
+    <Property Name="qm_sop_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="created_at" Type="DateTime" Precision="2" />
+    <Property Name="filePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="qm_tree_id" Type="Int32" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="department_id" Type="Int32" />
+    <Property Name="approved_by" Type="Int32" />
+    <NavigationProperty Name="department" Relationship="Self.FK__qm_sop__departme__67DE6983" FromRole="qm_sop" ToRole="department" />
+    <NavigationProperty Name="user" Relationship="Self.FK__qm_sop__approved__7908F585" FromRole="qm_sop" ToRole="users" />
+    <NavigationProperty Name="qm_tree" Relationship="Self.FK__qm_sop__qm_tree___4E1E9780" FromRole="qm_sop" ToRole="qm_tree" />
+  </EntityType>
+  <EntityType Name="qm_tree">
+    <Key>
+      <PropertyRef Name="qm_tree_id" />
+    </Key>
+    <Property Name="qm_tree_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="creator_id" Type="Int32" />
+    <Property Name="created_at" Type="DateTime" Precision="2" />
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="icon" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="childs" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="isChild" Type="Boolean" />
+    <NavigationProperty Name="qm_sop" Relationship="Self.FK__qm_sop__qm_tree___4E1E9780" FromRole="qm_tree" ToRole="qm_sop" />
+  </EntityType>
+  <EntityType Name="Resource">
+    <Key>
+      <PropertyRef Name="UniqueID" />
+    </Key>
+    <Property Name="UniqueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Int32" Nullable="false" />
+    <Property Name="ResourceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Color" Type="Int32" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="CustomField1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="service">
+    <Key>
+      <PropertyRef Name="service_id" />
+    </Key>
+    <Property Name="service_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="creator_id" Type="Int32" />
+    <Property Name="created_at" Type="DateTime" Precision="2" />
+    <Property Name="active" Type="Int32" />
+    <Property Name="code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Decimal" Precision="11" Scale="4" />
+    <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="isFavourite" Type="Int32" />
+    <Property Name="service_catalog_id" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="category_id" Type="Int32" />
+    <NavigationProperty Name="bill_details" Relationship="Self.FK__bill_deta__servi__662B2B3B" FromRole="service" ToRole="bill_details" />
+    <NavigationProperty Name="category" Relationship="Self.FK__service__categor__671F4F74" FromRole="service" ToRole="category" />
+    <NavigationProperty Name="service_catalog" Relationship="Self.FK__service__service__0D7A0286" FromRole="service" ToRole="service_catalog" />
+    <NavigationProperty Name="temp_service" Relationship="Self.FK__temp_serv__quant__793DFFAF" FromRole="service" ToRole="temp_service" />
+  </EntityType>
+  <EntityType Name="service_catalog">
+    <Key>
+      <PropertyRef Name="service_catalog_id" />
+    </Key>
+    <Property Name="service_catalog_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="creator_id" Type="Int32" />
+    <Property Name="created_at" Type="DateTime" Precision="2" />
+    <Property Name="active" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="services" Relationship="Self.FK__service__service__0D7A0286" FromRole="service_catalog" ToRole="service" />
+  </EntityType>
+  <EntityType Name="temp_search">
+    <Key>
+      <PropertyRef Name="temp_search_id" />
+    </Key>
+    <Property Name="temp_search_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="patient_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="2" />
+    <NavigationProperty Name="patient" Relationship="Self.FK__temp_sear__patie__7BE56230" FromRole="temp_search" ToRole="patients" />
+    <NavigationProperty Name="user" Relationship="Self.FK__temp_sear__user___7CD98669" FromRole="temp_search" ToRole="users" />
+  </EntityType>
+  <EntityType Name="temp_service">
+    <Key>
+      <PropertyRef Name="temp_service_id" />
+    </Key>
+    <Property Name="temp_service_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="service_id" Type="Int32" Nullable="false" />
+    <Property Name="patient_id" Type="Int32" Nullable="false" />
+    <Property Name="creator_id" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="11" Scale="4" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="patient" Relationship="Self.FK__temp_serv__patie__7A3223E8" FromRole="temp_service" ToRole="patients" />
+    <NavigationProperty Name="service" Relationship="Self.FK__temp_serv__quant__793DFFAF" FromRole="temp_service" ToRole="service" />
+    <NavigationProperty Name="user" Relationship="Self.FK__temp_serv__creat__7B264821" FromRole="temp_service" ToRole="users" />
+  </EntityType>
+  <EntityType Name="template">
+    <Key>
+      <PropertyRef Name="template_id" />
+    </Key>
+    <Property Name="template_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="creator_id" Type="Int32" />
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="source_document" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="active" Type="Int32" />
+    <NavigationProperty Name="bills" Relationship="Self.FK__bill__template_i__58D1301D" FromRole="template" ToRole="bill" />
+    <NavigationProperty Name="category" Relationship="Self.FK__template__catego__43D61337" FromRole="template" ToRole="category" />
+    <NavigationProperty Name="user" Relationship="Self.FK__template__creato__44CA3770" FromRole="template" ToRole="users" />
+  </EntityType>
+  <EntityType Name="time_recording">
+    <Key>
+      <PropertyRef Name="tc_id" />
+    </Key>
+    <Property Name="tc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="creator_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="created_at" Type="DateTime" Precision="2" />
+    <Property Name="date_from" Type="DateTime" Precision="2" />
+    <Property Name="date_to" Type="DateTime" Precision="2" />
+    <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="trt_id" Type="Int32" />
+    <Property Name="state" Type="Int32" />
+    <NavigationProperty Name="time_recording_details" Relationship="Self.FK__time_reco__tc_id__61316BF4" FromRole="time_recording" ToRole="time_recording_details" />
+    <NavigationProperty Name="user" Relationship="Self.FK__time_reco__trt_i__32767D0B" FromRole="time_recording" ToRole="users" />
+    <NavigationProperty Name="time_recording_type" Relationship="Self.FK__time_reco__trt_i__345EC57D" FromRole="time_recording" ToRole="time_recording_type" />
+    <NavigationProperty Name="user1" Relationship="Self.FK__time_reco__user___336AA144" FromRole="time_recording" ToRole="users" />
+  </EntityType>
+  <EntityType Name="time_recording_details">
+    <Key>
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="tc_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="tc_id" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="2" />
+    <Property Name="duration" Type="DateTime" Precision="2" />
+    <Property Name="duration2" Type="Int64" />
+    <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="time_recording" Relationship="Self.FK__time_reco__tc_id__61316BF4" FromRole="time_recording_details" ToRole="time_recording" />
+    <NavigationProperty Name="user" Relationship="Self.FK__time_reco__user___603D47BB" FromRole="time_recording_details" ToRole="users" />
+  </EntityType>
+  <EntityType Name="time_recording_type">
+    <Key>
+      <PropertyRef Name="trt_id" />
+    </Key>
+    <Property Name="trt_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="time_recording" Relationship="Self.FK__time_reco__trt_i__345EC57D" FromRole="time_recording_type" ToRole="time_recording" />
+  </EntityType>
+  <EntityType Name="user_detail">
+    <Key>
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="department_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="department_id" Type="Int32" Nullable="false" />
+    <Property Name="age" Type="Int32" />
+    <NavigationProperty Name="department" Relationship="Self.FK__user_deta__depar__2DE6D218" FromRole="user_detail" ToRole="department" />
+    <NavigationProperty Name="user" Relationship="Self.FK__user_deta__user___2CF2ADDF" FromRole="user_detail" ToRole="users" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emp_id" Type="String" MaxLength="8" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="salutation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="other_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="affix" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="sex" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="doctor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="acronym" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="confirm_password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="isActive" Type="Int32" />
+    <Property Name="skin_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="bills" Relationship="Self.FK__bill__creator_id__59C55456" FromRole="users" ToRole="bill" />
+    <NavigationProperty Name="casenotes" Relationship="Self.FK__casenote__creato__4F47C5E3" FromRole="users" ToRole="casenote" />
+    <NavigationProperty Name="categories" Relationship="Self.FK__category__creato__40F9A68C" FromRole="users" ToRole="category" />
+    <NavigationProperty Name="qm_sop" Relationship="Self.FK__qm_sop__approved__7908F585" FromRole="users" ToRole="qm_sop" />
+    <NavigationProperty Name="temp_search" Relationship="Self.FK__temp_sear__user___7CD98669" FromRole="users" ToRole="temp_search" />
+    <NavigationProperty Name="temp_service" Relationship="Self.FK__temp_serv__creat__7B264821" FromRole="users" ToRole="temp_service" />
+    <NavigationProperty Name="templates" Relationship="Self.FK__template__creato__44CA3770" FromRole="users" ToRole="template" />
+    <NavigationProperty Name="time_recording" Relationship="Self.FK__time_reco__trt_i__32767D0B" FromRole="users" ToRole="time_recording" />
+    <NavigationProperty Name="time_recording1" Relationship="Self.FK__time_reco__user___336AA144" FromRole="users" ToRole="time_recording" />
+    <NavigationProperty Name="time_recording_details" Relationship="Self.FK__time_reco__user___603D47BB" FromRole="users" ToRole="time_recording_details" />
+    <NavigationProperty Name="user_detail" Relationship="Self.FK__user_deta__user___2CF2ADDF" FromRole="users" ToRole="user_detail" />
+  </EntityType>
+  <Association Name="FK__bill__creator_id__59C55456">
+    <End Role="users" Type="Self.user" Multiplicity="1" />
+    <End Role="bill" Type="Self.bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="bill">
+        <PropertyRef Name="creator_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bill__patient_id__5BAD9CC8">
+    <End Role="patients" Type="Self.patient" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="bill" Type="Self.bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="patients">
+        <PropertyRef Name="patient_id" />
+      </Principal>
+      <Dependent Role="bill">
+        <PropertyRef Name="patient_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bill__template_i__58D1301D">
+    <End Role="template" Type="Self.template" Multiplicity="1" />
+    <End Role="bill" Type="Self.bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="template">
+        <PropertyRef Name="template_id" />
+      </Principal>
+      <Dependent Role="bill">
+        <PropertyRef Name="template_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bill_deta__bill___65370702">
+    <End Role="bill" Type="Self.bill" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="bill_details" Type="Self.bill_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bill">
+        <PropertyRef Name="bill_id" />
+      </Principal>
+      <Dependent Role="bill_details">
+        <PropertyRef Name="bill_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bill_deta__servi__662B2B3B">
+    <End Role="service" Type="Self.service" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="bill_details" Type="Self.bill_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="service">
+        <PropertyRef Name="service_id" />
+      </Principal>
+      <Dependent Role="bill_details">
+        <PropertyRef Name="service_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__casenote__catego__503BEA1C">
+    <End Role="category" Type="Self.category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="casenote" Type="Self.casenote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="casenote">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__casenote__creato__4F47C5E3">
+    <End Role="users" Type="Self.user" Multiplicity="1" />
+    <End Role="casenote" Type="Self.casenote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="casenote">
+        <PropertyRef Name="creator_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__casenote__patien__51300E55">
+    <End Role="patients" Type="Self.patient" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="casenote" Type="Self.casenote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="patients">
+        <PropertyRef Name="patient_id" />
+      </Principal>
+      <Dependent Role="casenote">
+        <PropertyRef Name="patient_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__category__creato__40F9A68C">
+    <End Role="users" Type="Self.user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="category" Type="Self.category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="category">
+        <PropertyRef Name="creator_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__service__categor__671F4F74">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="service" Type="Self.service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="service">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__template__catego__43D61337">
+    <End Role="category" Type="Self.category" Multiplicity="1" />
+    <End Role="template" Type="Self.template" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="template">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__qm_sop__departme__67DE6983">
+    <End Role="department" Type="Self.department" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="qm_sop" Type="Self.qm_sop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="qm_sop">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_deta__depar__2DE6D218">
+    <End Role="department" Type="Self.department" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="user_detail" Type="Self.user_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="user_detail">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__temp_sear__patie__7BE56230">
+    <End Role="patients" Type="Self.patient" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="temp_search" Type="Self.temp_search" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="patients">
+        <PropertyRef Name="patient_id" />
+      </Principal>
+      <Dependent Role="temp_search">
+        <PropertyRef Name="patient_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__temp_serv__patie__7A3223E8">
+    <End Role="patients" Type="Self.patient" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="temp_service" Type="Self.temp_service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="patients">
+        <PropertyRef Name="patient_id" />
+      </Principal>
+      <Dependent Role="temp_service">
+        <PropertyRef Name="patient_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__qm_sop__approved__7908F585">
+    <End Role="users" Type="Self.user" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="qm_sop" Type="Self.qm_sop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="qm_sop">
+        <PropertyRef Name="approved_by" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__qm_sop__qm_tree___4E1E9780">
+    <End Role="qm_tree" Type="Self.qm_tree" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="qm_sop" Type="Self.qm_sop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="qm_tree">
+        <PropertyRef Name="qm_tree_id" />
+      </Principal>
+      <Dependent Role="qm_sop">
+        <PropertyRef Name="qm_tree_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__service__service__0D7A0286">
+    <End Role="service_catalog" Type="Self.service_catalog" Multiplicity="1" />
+    <End Role="service" Type="Self.service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="service_catalog">
+        <PropertyRef Name="service_catalog_id" />
+      </Principal>
+      <Dependent Role="service">
+        <PropertyRef Name="service_catalog_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__temp_serv__quant__793DFFAF">
+    <End Role="service" Type="Self.service" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="temp_service" Type="Self.temp_service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="service">
+        <PropertyRef Name="service_id" />
+      </Principal>
+      <Dependent Role="temp_service">
+        <PropertyRef Name="service_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__temp_sear__user___7CD98669">
+    <End Role="users" Type="Self.user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="temp_search" Type="Self.temp_search" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="temp_search">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__temp_serv__creat__7B264821">
+    <End Role="users" Type="Self.user" Multiplicity="1" />
+    <End Role="temp_service" Type="Self.temp_service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="temp_service">
+        <PropertyRef Name="creator_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__template__creato__44CA3770">
+    <End Role="users" Type="Self.user" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="template" Type="Self.template" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="template">
+        <PropertyRef Name="creator_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__time_reco__tc_id__61316BF4">
+    <End Role="time_recording" Type="Self.time_recording" Multiplicity="1" />
+    <End Role="time_recording_details" Type="Self.time_recording_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="time_recording">
+        <PropertyRef Name="tc_id" />
+      </Principal>
+      <Dependent Role="time_recording_details">
+        <PropertyRef Name="tc_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__time_reco__trt_i__32767D0B">
+    <End Role="users" Type="Self.user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="time_recording" Type="Self.time_recording" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="time_recording">
+        <PropertyRef Name="creator_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__time_reco__trt_i__345EC57D">
+    <End Role="time_recording_type" Type="Self.time_recording_type" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="time_recording" Type="Self.time_recording" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="time_recording_type">
+        <PropertyRef Name="trt_id" />
+      </Principal>
+      <Dependent Role="time_recording">
+        <PropertyRef Name="trt_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__time_reco__user___336AA144">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="time_recording" Type="Self.time_recording" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="time_recording">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__time_reco__user___603D47BB">
+    <End Role="users" Type="Self.user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="time_recording_details" Type="Self.time_recording_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="time_recording_details">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_deta__user___2CF2ADDF">
+    <End Role="users" Type="Self.user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="user_detail" Type="Self.user_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="user_detail">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="emedEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Appointments" EntityType="Self.Appointment" />
+    <EntitySet Name="bills" EntityType="Self.bill" />
+    <EntitySet Name="bill_details" EntityType="Self.bill_details" />
+    <EntitySet Name="casenotes" EntityType="Self.casenote" />
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="departments" EntityType="Self.department" />
+    <EntitySet Name="messagings" EntityType="Self.messaging" />
+    <EntitySet Name="patients" EntityType="Self.patient" />
+    <EntitySet Name="qm_sop" EntityType="Self.qm_sop" />
+    <EntitySet Name="qm_tree" EntityType="Self.qm_tree" />
+    <EntitySet Name="Resources" EntityType="Self.Resource" />
+    <EntitySet Name="services" EntityType="Self.service" />
+    <EntitySet Name="service_catalog" EntityType="Self.service_catalog" />
+    <EntitySet Name="temp_search" EntityType="Self.temp_search" />
+    <EntitySet Name="temp_service" EntityType="Self.temp_service" />
+    <EntitySet Name="templates" EntityType="Self.template" />
+    <EntitySet Name="time_recording" EntityType="Self.time_recording" />
+    <EntitySet Name="time_recording_details" EntityType="Self.time_recording_details" />
+    <EntitySet Name="time_recording_type" EntityType="Self.time_recording_type" />
+    <EntitySet Name="user_detail" EntityType="Self.user_detail" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK__bill__creator_id__59C55456" Association="Self.FK__bill__creator_id__59C55456">
+      <End Role="users" EntitySet="users" />
+      <End Role="bill" EntitySet="bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bill__patient_id__5BAD9CC8" Association="Self.FK__bill__patient_id__5BAD9CC8">
+      <End Role="patients" EntitySet="patients" />
+      <End Role="bill" EntitySet="bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bill__template_i__58D1301D" Association="Self.FK__bill__template_i__58D1301D">
+      <End Role="template" EntitySet="templates" />
+      <End Role="bill" EntitySet="bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bill_deta__bill___65370702" Association="Self.FK__bill_deta__bill___65370702">
+      <End Role="bill" EntitySet="bills" />
+      <End Role="bill_details" EntitySet="bill_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bill_deta__servi__662B2B3B" Association="Self.FK__bill_deta__servi__662B2B3B">
+      <End Role="service" EntitySet="services" />
+      <End Role="bill_details" EntitySet="bill_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__casenote__catego__503BEA1C" Association="Self.FK__casenote__catego__503BEA1C">
+      <End Role="category" EntitySet="categories" />
+      <End Role="casenote" EntitySet="casenotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__casenote__creato__4F47C5E3" Association="Self.FK__casenote__creato__4F47C5E3">
+      <End Role="users" EntitySet="users" />
+      <End Role="casenote" EntitySet="casenotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__casenote__patien__51300E55" Association="Self.FK__casenote__patien__51300E55">
+      <End Role="patients" EntitySet="patients" />
+      <End Role="casenote" EntitySet="casenotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__category__creato__40F9A68C" Association="Self.FK__category__creato__40F9A68C">
+      <End Role="users" EntitySet="users" />
+      <End Role="category" EntitySet="categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__service__categor__671F4F74" Association="Self.FK__service__categor__671F4F74">
+      <End Role="category" EntitySet="categories" />
+      <End Role="service" EntitySet="services" />
+    </AssociationSet>
+    <AssociationSet Name="FK__template__catego__43D61337" Association="Self.FK__template__catego__43D61337">
+      <End Role="category" EntitySet="categories" />
+      <End Role="template" EntitySet="templates" />
+    </AssociationSet>
+    <AssociationSet Name="FK__qm_sop__departme__67DE6983" Association="Self.FK__qm_sop__departme__67DE6983">
+      <End Role="department" EntitySet="departments" />
+      <End Role="qm_sop" EntitySet="qm_sop" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_deta__depar__2DE6D218" Association="Self.FK__user_deta__depar__2DE6D218">
+      <End Role="department" EntitySet="departments" />
+      <End Role="user_detail" EntitySet="user_detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__temp_sear__patie__7BE56230" Association="Self.FK__temp_sear__patie__7BE56230">
+      <End Role="patients" EntitySet="patients" />
+      <End Role="temp_search" EntitySet="temp_search" />
+    </AssociationSet>
+    <AssociationSet Name="FK__temp_serv__patie__7A3223E8" Association="Self.FK__temp_serv__patie__7A3223E8">
+      <End Role="patients" EntitySet="patients" />
+      <End Role="temp_service" EntitySet="temp_service" />
+    </AssociationSet>
+    <AssociationSet Name="FK__qm_sop__approved__7908F585" Association="Self.FK__qm_sop__approved__7908F585">
+      <End Role="users" EntitySet="users" />
+      <End Role="qm_sop" EntitySet="qm_sop" />
+    </AssociationSet>
+    <AssociationSet Name="FK__qm_sop__qm_tree___4E1E9780" Association="Self.FK__qm_sop__qm_tree___4E1E9780">
+      <End Role="qm_tree" EntitySet="qm_tree" />
+      <End Role="qm_sop" EntitySet="qm_sop" />
+    </AssociationSet>
+    <AssociationSet Name="FK__service__service__0D7A0286" Association="Self.FK__service__service__0D7A0286">
+      <End Role="service_catalog" EntitySet="service_catalog" />
+      <End Role="service" EntitySet="services" />
+    </AssociationSet>
+    <AssociationSet Name="FK__temp_serv__quant__793DFFAF" Association="Self.FK__temp_serv__quant__793DFFAF">
+      <End Role="service" EntitySet="services" />
+      <End Role="temp_service" EntitySet="temp_service" />
+    </AssociationSet>
+    <AssociationSet Name="FK__temp_sear__user___7CD98669" Association="Self.FK__temp_sear__user___7CD98669">
+      <End Role="users" EntitySet="users" />
+      <End Role="temp_search" EntitySet="temp_search" />
+    </AssociationSet>
+    <AssociationSet Name="FK__temp_serv__creat__7B264821" Association="Self.FK__temp_serv__creat__7B264821">
+      <End Role="users" EntitySet="users" />
+      <End Role="temp_service" EntitySet="temp_service" />
+    </AssociationSet>
+    <AssociationSet Name="FK__template__creato__44CA3770" Association="Self.FK__template__creato__44CA3770">
+      <End Role="users" EntitySet="users" />
+      <End Role="template" EntitySet="templates" />
+    </AssociationSet>
+    <AssociationSet Name="FK__time_reco__tc_id__61316BF4" Association="Self.FK__time_reco__tc_id__61316BF4">
+      <End Role="time_recording" EntitySet="time_recording" />
+      <End Role="time_recording_details" EntitySet="time_recording_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__time_reco__trt_i__32767D0B" Association="Self.FK__time_reco__trt_i__32767D0B">
+      <End Role="users" EntitySet="users" />
+      <End Role="time_recording" EntitySet="time_recording" />
+    </AssociationSet>
+    <AssociationSet Name="FK__time_reco__trt_i__345EC57D" Association="Self.FK__time_reco__trt_i__345EC57D">
+      <End Role="time_recording_type" EntitySet="time_recording_type" />
+      <End Role="time_recording" EntitySet="time_recording" />
+    </AssociationSet>
+    <AssociationSet Name="FK__time_reco__user___336AA144" Association="Self.FK__time_reco__user___336AA144">
+      <End Role="users" EntitySet="users" />
+      <End Role="time_recording" EntitySet="time_recording" />
+    </AssociationSet>
+    <AssociationSet Name="FK__time_reco__user___603D47BB" Association="Self.FK__time_reco__user___603D47BB">
+      <End Role="users" EntitySet="users" />
+      <End Role="time_recording_details" EntitySet="time_recording_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_deta__user___2CF2ADDF" Association="Self.FK__user_deta__user___2CF2ADDF">
+      <End Role="users" EntitySet="users" />
+      <End Role="user_detail" EntitySet="user_detail" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
